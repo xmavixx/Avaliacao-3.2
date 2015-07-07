@@ -10,26 +10,26 @@ import java.util.Objects;
  * @author 
  */
 public class Lancamento {
-    private Integer conta;
+    private Integer calculo;
     private Date data;
-    private String descricao;
+    private String desc;
     private Double valor;
     
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dia: (dd)/mes: (MM)/ano: (yyyy)");
 
-    public Lancamento(Integer conta, Date data, String descricao, Double valor) {
-        this.conta = conta;
+    public Lancamento(Integer calculo, Date data, String desc, Double valor) {
+        this.calculo = calculo;
         this.data = data;
-        this.descricao = descricao;
+        this.desc = desc;
         this.valor = valor;
     }
 
     public Integer getConta() {
-        return conta;
+        return calculo;
     }
 
     public void setConta(Integer conta) {
-        this.conta = conta;
+        this.calculo = conta;
     }
 
     public Date getData() {
@@ -41,11 +41,11 @@ public class Lancamento {
     }
 
     public String getDescricao() {
-        return descricao;
+        return desc;
     }
 
     public void setDescricao(String descricao) {
-        this.descricao = descricao;
+        this.desc = descricao;
     }
 
     public Double getValor() {
@@ -58,21 +58,21 @@ public class Lancamento {
 
     @Override
     public String toString() {
-        return String.format("%06d %s %-60s %20f", conta, dateFormat.format(data),
-                descricao, valor);
+        return String.format("%06d %s %-60s %20f", calculo, dateFormat.format(data),
+                desc, valor);
     }    
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.conta);
+        hash = 29 * hash + Objects.hashCode(this.calculo);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
         return obj != null && getClass() == obj.getClass()
-                && this.conta.equals(((Lancamento)obj).conta);
+                && this.calculo.equals(((Lancamento)obj).calculo);
     }
 
 }
