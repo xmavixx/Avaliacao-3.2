@@ -15,39 +15,40 @@ import utfpr.ct.dainf.if62c.avaliacao.ProcessaLancamentos;
 public class Avaliacao3 {
 
     public static void main(String[] args) throws FileNotFoundException, IOException {
-        Scanner scan = new Scanner(System.in);
-        String pacotes;
-        System.out.println("Caminho completo do pacote: ");
-        pacotes = scan.next();
-        ProcessaLancamentos pl = new ProcessaLancamentos(pacotes);
-        ArrayList<Lancamento> lancamentos = (ArrayList<Lancamento>) pl.getLancamentos();
-        do {
-            String conta = scan.next();
-            Integer calculo = Integer.valueOf(conta);
-            if (calculo == 0) {
-                break;
-            }
-            if (calculo == null) {
+        Scanner entrada = new Scanner(System.in);
+
+        String path, conta;
+        System.out.println("Digite o caminho do arquivo:");
+        path = entrada.next();
+        ProcessaLancamentos processa = new ProcessaLancamentos(path);
+        List<Lancamento> lista = processa.getLancamentos();
+
+        boolean diferente = false;
+
+        while (!diferente) {
+
+            System.out.println("Digite o numero da conta:");
+            if (entrada.hasNextInt()) {
+                int i = entrada.nextInt();
+                exibeLancamentosConta(lista, i);
+            } else {
                 System.out.println("Por favor, informe um valor numérico");
-                continue;
             }
-            if (lancamentos.indexOf(calculo) == -1) {
-                System.out.println("Conta inexistente");
-                continue;
-            }
-            exibeLancamentosConta(lancamentos, calculo);
-        } while (true);
+        }
     }
 
     public static void exibeLancamentosConta(List<Lancamento> lancamentos, Integer conta) {
-        Integer i = lancamentos.indexOf(conta);
+
+        int i = lancamentos.indexOf(new Lancamento(conta, null, null, Double.NaN));
         if (i == -1) {
-            return;
-        }
-        Lancamento lanca = lancamentos.get(i);
-        while (lanca.getConta() == conta) {
-            System.out.println(lanca);
-            lanca = lancamentos.get(++i);
+            System.out.println("Conta inexistente.");
+        } else {
+
+            int j = lancamentos.lastIndexOf(new Lancamento(conta, null, null, Double.NaN));
+            while (i <= j) {
+                System.out.println(lancamentos.get(i));
+                i++;
+            }
         }
     }
 }

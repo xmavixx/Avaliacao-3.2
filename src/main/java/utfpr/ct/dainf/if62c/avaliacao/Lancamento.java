@@ -5,31 +5,31 @@ import java.util.Date;
 import java.util.Objects;
 
 /**
- * IF62C Fundamentos de Programação 2
- * Avaliação parcial.
- * @author 
+ * IF62C Fundamentos de Programação 2 Avaliação parcial.
+ *
+ * @author
  */
 public class Lancamento {
-    private Integer calculo;
-    private Date data;
-    private String desc;
-    private Double valor;
-    
-    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dia: (dd)/mes: (MM)/ano: (yyyy)");
 
-    public Lancamento(Integer calculo, Date data, String desc, Double valor) {
-        this.calculo = calculo;
+    private Integer conta;
+    private Date data;
+    private String descricao;
+    private Double valor;
+    private final SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+
+    public Lancamento(Integer conta, Date data, String descricao, Double valor) {
+        this.conta = conta;
         this.data = data;
-        this.desc = desc;
+        this.descricao = descricao;
         this.valor = valor;
     }
 
     public Integer getConta() {
-        return calculo;
+        return conta;
     }
 
     public void setConta(Integer conta) {
-        this.calculo = conta;
+        this.conta = conta;
     }
 
     public Date getData() {
@@ -41,11 +41,11 @@ public class Lancamento {
     }
 
     public String getDescricao() {
-        return desc;
+        return descricao;
     }
 
     public void setDescricao(String descricao) {
-        this.desc = descricao;
+        this.descricao = descricao;
     }
 
     public Double getValor() {
@@ -58,21 +58,20 @@ public class Lancamento {
 
     @Override
     public String toString() {
-        return String.format("%06d %s %-60s %20f", calculo, dateFormat.format(data),
-                desc, valor);
-    }    
+        return String.format("%06d %s %-60s %20f", conta, dateFormat.format(data),
+                descricao, valor);
+    }
 
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 29 * hash + Objects.hashCode(this.calculo);
+        hash = 29 * hash + Objects.hashCode(this.conta);
         return hash;
     }
 
     @Override
     public boolean equals(Object obj) {
         return obj != null && getClass() == obj.getClass()
-                && this.calculo.equals(((Lancamento)obj).calculo);
+                && this.conta.equals(((Lancamento) obj).conta);
     }
-
 }
