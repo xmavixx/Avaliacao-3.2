@@ -53,23 +53,28 @@ public class ProcessaLancamentos {
 
     private Lancamento getNextLancamento() throws IOException {
         String linha = getNextLine();
-        if (linha == null) {
-            return null;
+        if (linha != null) {
+            System.out.println(linha);
+            return processaLinha(linha);
         } else {
-            Lancamento lanc = processaLinha(linha);
-            return lanc;
+            return null;
         }
     }
 
     public List<Lancamento> getLancamentos() throws IOException {
-        Lancamento lanc = getNextLancamento();
-        ArrayList<Lancamento> lista = new ArrayList<>();
-        while (lanc != null) {
-            lista.add(lanc);
+        List<Lancamento> lista = new ArrayList<>();
+        Lancamento a;
+        while ((a = getNextLancamento()) != null) {
+            lista.add(a);
         }
-        LancamentoComparator c = new LancamentoComparator();
-        Collections.sort(lista, c);
-        reader.close();
+        for (Lancamento l : lista) {
+            System.out.println(l);
+        }
+        lista.sort(new LancamentoComparator());
+        System.out.println("-- '' --");
+        for (Lancamento l : lista) {
+            System.out.println(l);
+        }
         return lista;
     }
 }
